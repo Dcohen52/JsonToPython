@@ -1,0 +1,41 @@
+[
+  {
+    "var": "x",
+    "value": 10
+  },
+  {
+    "function": "factorial",
+    "params": ["n"],
+    "body": [
+      {
+        "if": {
+          "condition": {"<=": ["$n", 1]},
+          "then": [
+            {"return": 1}
+          ],
+          "else": [
+            {
+              "var": "result",
+              "value": {"*": ["$n", {"function_call": ["factorial", [{"-": ["$n", 1]}]]}]}
+            },
+            {
+              "return": "result"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "__name__": "main",
+    "body": [
+      {
+        "var": "y",
+        "value": {"function_call": ["factorial", ["$x"]]}
+      },
+      {
+        "print": "y"
+      }
+    ]
+  }
+]
