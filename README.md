@@ -37,18 +37,28 @@ print(python_code)
   },
   {
     "function": "factorial",
-    "params": ["n"],
+    "params": [
+      "n"
+    ],
     "body": [
       {
         "if": {
-          "condition": {"<=": ["$n", 1]},
+          "condition": {
+            "<=": [
+              "$n",
+              1
+            ]
+          },
           "then": [
-            {"return": 1}
+            {
+              "return": 1
+            }
           ],
           "else": [
             {
               "var": "result",
-              "value": {"*": ["$n", {"function_call": ["factorial", [{"-": ["$n", 1]}]]}]}
+              "value": "n * (n - 1)"
+
             },
             {
               "return": "result"
@@ -63,7 +73,15 @@ print(python_code)
     "body": [
       {
         "var": "y",
-        "value": {"function_call": ["factorial", ["$x"]]}
+        "value": {
+          "function_call": [
+            "factorial",
+            [
+              10
+            ]
+          ],
+          "comment": "this is a comment"
+        }
       },
       {
         "print": "y"
@@ -71,20 +89,21 @@ print(python_code)
     ]
   }
 ]
+
 ```
 This JSON code is equivalent to the Python code:
 
 ``` python
 x = 10
 def factorial(n):
-    if (n <= 1):
+    if n <= 1:
         return 1
     else:
-        result = (n * factorial((n - 1)))
+        result = n * (n - 1)
         return result
     
 if __name__ == '__main__':
-    y = factorial(x)
+    y = factorial(10)
     print(y)
 ```
 
@@ -104,6 +123,10 @@ The `JsonToPython` class supports the following JSON elements:
 
 # Changelog
 The changelog provides an overview of notable updates and improvements made to the `JsonToPython` library throughout its development. Users can refer to this section to stay informed about new features, bug fixes, and performance enhancements.
+
+## [Unreleased - Version 0.0.2-dev] - 02.05.2023
+### Changed
+* Bug fixes: Enhanced expression and function processing to ensure the export of a more precise representation of the code.
 
 ## [Unreleased - Version 0.0.1-dev] - 29.04.2023
 ### Added
