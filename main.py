@@ -1,4 +1,5 @@
 import json
+import re
 
 
 class JsonToPython:
@@ -52,6 +53,14 @@ class JsonToPython:
                 func_name=function_name, func_params=params, func_body=body.replace("\n", "\n    "),
                 return_stmt=return_statement
             )
+        elif function_name == "main":
+            return 'def {func_name}({func_params}):\n    {func_body}\n\nif __name__ == "__main__":\n    {func_name}()'.format(
+                func_name=function_name, func_params=params, func_body=body.replace("\n", "\n    ")
+            )
+        elif function_name == "print":
+            return 'def {func_name}({func_params}):\n    {func_body}'.format(
+                func_name=function_name, func_params=params, func_body=body.replace("\n", "\n    ")
+            )
         else:
             return 'def {func_name}({func_params}):\n    {func_body}'.format(
                 func_name=function_name, func_params=params, func_body=body.replace("\n", "\n    ")
@@ -62,12 +71,19 @@ class JsonToPython:
         then_block = "\n".join(self.process_element(stmt) for stmt in element["if"]["then"])
         else_block = "\n".join(self.process_element(stmt) for stmt in element["if"]["else"])
 
-        return 'if {}:\n    {}\nelse:\n    {}'.format(condition, then_block.replace("\n", "\n    "),
+        if else_block == "":
+            return 'if {}:\n    {}'.format(condition, then_block.replace("\n", "\n    "))
+        elif then_block == "":
+            return 'if not {}:\n    {}'.format(condition, else_block.replace("\n", "\n    "))
+
+        return 'if {}:\n    {}\nelse:\n    {}'.format(condition.strip("()"), then_block.replace("\n", "\n    "),
                                                       else_block.replace("\n", "\n    "))
 
     def process_while(self, element):
         condition = self.process_expression(element["while"]["condition"])
         body = "\n".join(self.process_element(stmt) for stmt in element["while"]["body"])
+        if body == "":
+            return 'while {}:\n    pass'.format(condition)
         return 'while {}:\n    {}'.format(condition, body.replace("\n", "\n    "))
 
     def process_for(self, element):
@@ -102,6 +118,25 @@ class JsonToPython:
                     return 'print({})'.format(", ".join(self.process_expression(arg) for arg in args))
                 elif op == "input":
                     return 'input({})'.format(self.process_expression(args))
+                elif op == "[]":
+                    var, index = args
+                    return '{}[{}]'.format(self.process_variable(var), self.process_expression(index))
+                elif op == "[]=":
+                    var, index, value = args
+                    return '{}[{}] = {}'.format(self.process_variable(var), self.process_expression(index),
+                                                self.process_expression(value))
+                elif op == "if":
+                    return self.process_if(args)
+                elif op == "while":
+                    return self.process_while(args)
+                elif op == "for":
+                    return self.process_for(args)
+                elif op == "return":
+                    return self.process_return(args)
+                elif op == "input":
+                    return self.process_input(args)
+                elif op == "var":
+                    return self.process_variable(args)
         elif isinstance(expression, list):
             if len(expression) == 1:
                 return self.process_expression(expression[0])
@@ -114,6 +149,7 @@ class JsonToPython:
             elif len(expression) == 3:
                 op, left, right = expression
                 return '({} {} {})'.format(self.process_expression(left), op, self.process_expression(right))
+
             else:
                 raise ValueError("Invalid expression: {}".format(expression))
         elif isinstance(expression, str):
@@ -134,23 +170,27 @@ class JsonToPython:
         else:
             raise ValueError("Invalid variable: {}".format(variable))
 
-    def process_variable(self, variable):
-        if isinstance(variable, str) and variable.startswith("$"):
-            return variable[1:]
-        else:
-            raise ValueError("Invalid variable: {}".format(variable))
-
     def process_print(self, element):
         if isinstance(element["print"], str):
             return 'print({})'.format(element["print"])
+        elif isinstance(element["print"], list):
+            return 'print({})'.format(", ".join(self.process_expression(arg) for arg in element["print"]))
+        elif isinstance(element["print"], dict):
+            return 'print({})'.format(self.process_expression(element["print"]))
+        elif isinstance(element["print"], tuple):
+            return 'print({})'.format(", ".join(self.process_expression(arg) for arg in element["print"]))
+        elif isinstance(element["print"], set):
+            return 'print({})'.format(", ".join(self.process_expression(arg) for arg in element["print"]))
         else:
             return 'print({})'.format(", ".join(self.process_expression(arg) for arg in element["print"]))
 
     def process_name_main(self, element):
         main_value = element["__name__"]
         body = "\n".join(self.process_element(stmt) for stmt in element["body"])
-
-        if main_value == "main":
-            return "if __name__ == '__main__':\n    {}".format(body.replace('\n', '\n    '))
+        if function_call := re.match(r"(.*)\((.*)\)", main_value):
+            return "{}({})".format(function_call.group(1), function_call.group(2))
         else:
-            raise ValueError("Invalid value for __name__: {}".format(main_value))
+            if main_value == "main":
+                return "if __name__ == '__main__':\n    {}".format(body.replace('\n', '\n    '))
+            else:
+                raise ValueError("Invalid value for __name__: {}".format(main_value))
