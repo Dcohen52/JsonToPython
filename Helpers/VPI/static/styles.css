@@ -1,72 +1,124 @@
-/* styles.css */
-
-body {
-  font-family: Arial, sans-serif;
+/* Reset default styles */
+* {
   margin: 0;
-  padding: 20px;
-  background-color: #f5f5f5;
+  padding: 0;
+  box-sizing: border-box;
+  border-radius: 10px;
 }
 
+/* Body styles */
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+/* Heading styles */
 h1 {
   text-align: center;
+  margin-bottom: 30px;
+}
+
+h4 {
   margin-bottom: 20px;
 }
 
+/* Toolbox styles */
 #toolbox {
-  float: left;
-  width: 200px;
-  padding: 10px;
   background-color: #f5f5f5;
   border: 1px solid #ddd;
-  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
+/* Block styles */
 .block {
-  width: 100px;
-  height: 50px;
-  background-color: #ccc;
-  border: 1px solid #aaa;
-  border-radius: 5px;
   padding: 10px;
-  margin-bottom: 10px;
+    margin: 5px;
+  border-radius: 5px;
   cursor: move;
-  text-align: center;
-  line-height: 30px;
+}
+
+.ws-block {
+  padding: 10px;
+    margin: 5px;
+  border-radius: 5px;
+  cursor: move;
+}
+
+/* Button styles */
+.block-variable {
+  background-color: #ffc107;
   color: #333;
 }
 
-#workspace {
-  margin-left: 220px;
-  padding: 20px;
-  background-color: #f5f5f5;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  min-height: 200px;
+.block-function {
+  background-color: #03a9f4;
+  color: #fff;
 }
 
+.block-condition {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+.block-loop {
+  background-color: #9c27b0;
+  color: #fff;
+}
+
+.block-data {
+  background-color: #e91e63;
+  color: #fff;
+}
+
+/* Workspace styles */
+#workspace {
+  min-height: 200px;
+  border: 1px dashed #ccc;
+  margin-bottom: 20px;
+}
+
+/* Convert button styles */
 #convert-button {
-  margin-top: 20px;
+  display: block;
+  margin: 0 auto;
   padding: 10px 20px;
-  background-color: #4CAF50;
-  color: white;
+  background-color: #333;
+  color: #fff;
   border: none;
   border-radius: 5px;
-  font-size: 16px;
   cursor: pointer;
 }
 
-#convert-button:hover {
-  background-color: #45a049;
+/* Code display styles */
+#code-div {
+  display: flex;
+  justify-content: space-between;
 }
 
-#python-code,
-#json-code {
-  background-color: #f9f9f9;
-  padding: 10px;
-  margin-top: 20px;
+pre {
+  background-color: #f5f5f5;
   border: 1px solid #ddd;
-  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 20px;
   white-space: pre-wrap;
-  font-family: monospace;
   font-size: 14px;
+  line-height: 1.5;
+}
+
+.code-blocks {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+  #toolbox {
+    justify-content: center;
+  }
 }

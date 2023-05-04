@@ -41,7 +41,15 @@ def transpile():
     python_code = request.json['python_code']
     transpiler = PythonToJson(python_code)
     json_structure = transpiler.transpile()
-    return jsonify(json.loads(json_structure))
+
+    # Convert the Python code to JSON structure
+    json_data = json.loads(json_structure)
+
+    # Return the Python code and JSON structure as a response
+    return jsonify({
+        'pythonCode': python_code,
+        'jsonCode': json_data
+    })
 
 if __name__ == '__main__':
     app.run()

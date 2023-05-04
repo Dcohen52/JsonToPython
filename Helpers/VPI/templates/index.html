@@ -7,23 +7,32 @@
 <body>
 <h1>Visual Programming Web App</h1>
 <div id="toolbox">
-    <div class="block" draggable="true">Variable</div>
-    <div class="block" draggable="true">Function</div>
-    <div class="block" draggable="true">If Statement</div>
-    <div class="block" draggable="true">While Loop</div>
-    <div class="block" draggable="true">For Loop</div>
-    <div class="block" draggable="true">Return</div>
-    <div class="block" draggable="true">Print</div>
-    <div class="block" draggable="true">Input</div>
-    <div class="block" draggable="true">String</div>
-    <div class="block" draggable="true">Integer</div>
-    <div class="block" draggable="true">Float</div>
-    <div class="block" draggable="true">Boolean</div>
+    <div class="block block-variable" draggable="true">Variable</div>
+    <div class="block block-function" draggable="true">Function</div>
+    <div class="block block-condition" draggable="true">If Statement</div>
+    <div class="block block-loop" draggable="true">While Loop</div>
+    <div class="block block-loop" draggable="true">For Loop</div>
+    <div class="block block-function" draggable="true">Return</div>
+    <div class="block block-function" draggable="true">Print</div>
+    <div class="block block-variable" draggable="true">Input</div>
+    <div class="block block-data" draggable="true">String</div>
+    <div class="block block-data" draggable="true">Integer</div>
+    <div class="block block-data" draggable="true">Float</div>
+    <div class="block block-data" draggable="true">Boolean</div>
 </div>
 <div id="workspace"></div>
 <button id="convert-button">Convert to Python and JSON</button>
-<pre id="python-code"></pre>
-<pre id="json-code"></pre>
+<div id="code-div">
+    <div class="code-blocks">
+        <h4>Python Code</h4>
+        <pre id="python-code"></pre>
+    </div>
+    <div class="code-blocks">
+        <h4>JSON Representation</h4>
+        <pre id="json-code"></pre>
+    </div>
+</div>
+
 
 <script src="{{ url_for('static', filename='script.js') }}"></script>
 
