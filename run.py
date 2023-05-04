@@ -1,7 +1,7 @@
 import json
-from main import JsonToPython
+from json_to_python import JsonToPython
 
-with open("Examples/factorial.json") as f:
+with open("Helpers/factorial.json") as f:
     json_structure = json.load(f)
 
 transpiler = JsonToPython(json_structure)

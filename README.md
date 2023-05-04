@@ -1,5 +1,9 @@
-# Json -> Python
-`JsonToPython` (offer a better name) is a Python class designed to facilitate the seamless conversion of JSON structure-code into Python code. This library accommodates a diverse range of Python constructs, including variables, functions, if-else statements, while and for loops, return statements, print statements, and input statements, among others. By leveraging the versatility of `JsonToPython`, developers can harness their creativity to efficiently compose code using JSON files.
+# PJHarpy
+
+PJHarpy is a powerful package designed to transpile JSON structure-code into Python code and vice versa. It features two classes: JsonToPython and PythonToJSON. The JsonToPython class enables developers to efficiently compose Python code using JSON files, supporting various constructs like variables, functions, if-else statements, loops, return statements, and more. On the other hand, the PythonToJSON class facilitates the conversion of Python code into a JSON representation of its abstract syntax tree (AST). PJHarpy's goal is to provide a fresh, innovative approach to web development that closely mirrors JSON, catering to the evolving demands of the industry. With its easy installation and versatile usage, PJHarpy is an invaluable tool for developers looking to streamline their coding process and enhance their workflow.
+
+## JsonToPython class
+`JsonToPython` is a Python class designed to facilitate the seamless conversion of JSON structure-code into Python code. This library accommodates a diverse range of Python constructs, including variables, functions, if-else statements, while and for loops, return statements, print statements, and input statements, among others. By leveraging the versatility of `JsonToPython`, developers can harness their creativity to efficiently compose code using JSON files.
 
 The driving force behind this project was to create a programming language that closely mirrors JSON, offering a fresh and innovative approach to web development, which caters to the evolving demands of the industry.
 
@@ -17,7 +21,7 @@ Here's a basic example of how to use the `JsonToPython` class:
 
 ``` python
 import json
-from <> import JsonToPython
+from json_to_python import JsonToPython
 ```
 
 # Transpile JSON structure to Python code
@@ -92,7 +96,7 @@ The `JsonToPython` class supports the following JSON elements:
 * **Input statements:** "input"
 * **Expressions:** "expression"
 ---
-# Python -> JSON
+# PythonToJSON class
 This Python class enables the conversion of Python code into a JSON representation of its abstract syntax tree (AST).
 
 ## Usage
@@ -222,12 +226,16 @@ The JSON structure encompasses the following node types:
 
 
 # Changelog
-The changelog provides an overview of notable updates and improvements made to the `JsonToPython` library throughout its development. Users can refer to this section to stay informed about new features, bug fixes, and performance enhancements.
+The changelog provides an overview of notable updates and improvements made to the PJHarpy library throughout its development. Users can refer to this section to stay informed about new features, bug fixes, and performance enhancements.
 
 ## [Unreleased - Version 0.0.3-dev] - 04.05.2023
 ### Added - JSON to Python class
 * Basic functionality for converting Python code into a JSON representation of its abstract syntax tree (AST).
 * Support for various Python constructs, including variables, functions, if-else statements, while and for loops, return statements, and list comprehensions.
+
+### Changed - Python to JSON class
+* Bug fixes.
+* Enhanced performance.
 
 ## [Unreleased - Version 0.0.2-dev] - 02.05.2023
 ### Changed

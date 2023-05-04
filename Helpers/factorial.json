@@ -1,0 +1,53 @@
+[
+  {
+    "var": "y",
+    "value": 5
+  },
+  {
+    "function": "fibonacci",
+    "params": [
+      "n"
+    ],
+    "body": [
+      {
+        "if": {
+          "condition": {
+            "<=": [
+              "$n",
+              1
+            ]
+          },
+          "then": [
+            {
+              "return": "$n"
+            }
+          ],
+          "else": [
+            {
+              "var": "result",
+              "value": {
+                "+": [
+                  {
+                    "-": [
+                      "$n",
+                      1
+                    ]
+                  },
+                  {
+                    "-": [
+                      "$n",
+                      2
+                    ]
+                  }
+                ]
+              }
+            },
+            {
+              "return": "$result"
+            }
+          ]
+        }
+      }
+    ]
+  }
+]
