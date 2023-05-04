@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Visual Programming Web App</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+<h1>Visual Programming Web App</h1>
+<div id="toolbox">
+    <div class="block" draggable="true">Variable</div>
+    <div class="block" draggable="true">Function</div>
+    <div class="block" draggable="true">If Statement</div>
+    <div class="block" draggable="true">While Loop</div>
+    <div class="block" draggable="true">For Loop</div>
+    <div class="block" draggable="true">Return</div>
+    <div class="block" draggable="true">Print</div>
+    <div class="block" draggable="true">Input</div>
+    <div class="block" draggable="true">String</div>
+    <div class="block" draggable="true">Integer</div>
+    <div class="block" draggable="true">Float</div>
+    <div class="block" draggable="true">Boolean</div>
+</div>
+<div id="workspace"></div>
+<button id="convert-button">Convert to Python and JSON</button>
+<pre id="python-code"></pre>
+<pre id="json-code"></pre>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>

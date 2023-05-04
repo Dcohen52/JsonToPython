@@ -1,0 +1,72 @@
+/* styles.css */
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#toolbox {
+  float: left;
+  width: 200px;
+  padding: 10px;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.block {
+  width: 100px;
+  height: 50px;
+  background-color: #ccc;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  cursor: move;
+  text-align: center;
+  line-height: 30px;
+  color: #333;
+}
+
+#workspace {
+  margin-left: 220px;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  min-height: 200px;
+}
+
+#convert-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#convert-button:hover {
+  background-color: #45a049;
+}
+
+#python-code,
+#json-code {
+  background-color: #f9f9f9;
+  padding: 10px;
+  margin-top: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  white-space: pre-wrap;
+  font-family: monospace;
+  font-size: 14px;
+}

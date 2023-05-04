@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python to JSON Transpiler</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Python to JSON Transpiler</h1>
+    <p>Why JSON? Because it shows the best how the code is structured.</p>
+    <textarea id="codeInput" rows="10" placeholder="Enter your Python code here..."></textarea>
+    <button id="transpileBtn">Transpile</button>
+    <pre id="jsonOutput"></pre>
+
+    <script>
+        document.getElementById('transpileBtn').addEventListener('click', async () => {
+            const codeInput = document.getElementById('codeInput');
+            const jsonOutput = document.getElementById('jsonOutput');
+
+            const code = codeInput.value;
+            const response = await fetch('http://127.0.0.1:5000/api/transpile', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: 'code=' + encodeURIComponent(code),
+            });
+
+            const json = await response.json();
+            jsonOutput.textContent = JSON.stringify(json, null, 2);
+        });
+    </script>
+</body>
+</html>
