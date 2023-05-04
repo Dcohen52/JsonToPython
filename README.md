@@ -8,7 +8,7 @@ PJHarpy is a powerful package designed to transpile JSON structure-code into Pyt
 The driving force behind this project was to create a programming language that closely mirrors JSON, offering a fresh and innovative approach to web development, which caters to the evolving demands of the industry.
 
 ## Installation
-To install the package, please clone the repository by executing the following command:
+To use the repo, please clone the repository by executing the following command:
 
 ``` git
 git clone https://github.com/Dcohen52/JsonToPython
