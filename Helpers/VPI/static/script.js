@@ -11,6 +11,7 @@
 
 function makeWorkspaceDroppable() {
   const workspace = document.getElementById('workspace');
+  const resetButton = document.getElementById('reset-button');
   let indentLevel = 0;
 
   workspace.addEventListener('dragover', event => {
@@ -46,6 +47,21 @@ function makeWorkspaceDroppable() {
       }
       pythonCode = `${'\t'.repeat(indentLevel)}if ${condition}:${'\t'.repeat(indentLevel + 1)}${value}`;
       indentLevel += 1;
+    } else if (blockText === 'Else If Statement') {
+        const condition = prompt('Enter the condition:');
+        const value = prompt('Enter the value:');
+        if (value === null) {
+            return; // User clicked cancel
+        }
+        pythonCode = `${'\t'.repeat(indentLevel)}elif ${condition}:${'\t'.repeat(indentLevel + 1)}${value}`;
+        indentLevel += 1;
+    } else if (blockText === 'Else Statement') {
+        const value = prompt('Enter the value:');
+        if (value === null) {
+            return; // User clicked cancel
+        }
+        pythonCode = `${'\t'.repeat(indentLevel)}else:${'\t'.repeat(indentLevel + 1)}${value}`;
+        indentLevel += 1;
     } else if (blockText === 'While Loop') {
       const condition = prompt('Enter the condition:');
       pythonCode = `${'\t'.repeat(indentLevel)}while ${condition}:${'\t'.repeat(indentLevel + 1)}`;
@@ -82,7 +98,63 @@ function makeWorkspaceDroppable() {
 
 
 const blockElement = document.createElement('div');
-blockElement.classList.add('block');
+if (blockText === 'Variable') {
+    blockElement.classList.add('block');
+    blockElement.classList.add('block-variable');
+} else if (blockText === 'Function') {
+    blockElement.classList.add('block');
+    blockElement.classList.add('block-function');
+    blockElement.style.color = 'black';
+} else if (blockText === 'If Statement') {
+    blockElement.classList.add('block');
+    blockElement.classList.add('block-condition');
+    blockElement.style.color = 'black';
+} else if (blockText === 'Else If Statement') {
+    blockElement.classList.add('block');
+    blockElement.classList.add('block-condition');
+    blockElement.style.color = 'black';
+} else if (blockText === 'Else Statement') {
+    blockElement.classList.add('block');
+    blockElement.classList.add('block-condition');
+    blockElement.style.color = 'black';
+} else if (blockText === 'While Loop') {
+    blockElement.classList.add('block');
+    blockElement.classList.add('block-loop');
+    blockElement.style.color = 'black';
+} else if (blockText === 'For Loop') {
+    blockElement.classList.add('block');
+    blockElement.classList.add('block-loop');
+    blockElement.style.color = 'black';
+} else if (blockText === 'Return') {
+    blockElement.classList.add('block');
+    blockElement.classList.add('block-function');
+    blockElement.style.color = 'black';
+} else if (blockText === 'Print') {
+    blockElement.classList.add('block');
+    blockElement.classList.add('block-function');
+    blockElement.style.color = 'black';
+} else if (blockText === 'Input') {
+    blockElement.classList.add('block');
+    blockElement.classList.add('block-variable');
+} else if (blockText === 'String') {
+    blockElement.classList.add('block');
+    blockElement.classList.add('block-data');
+    blockElement.style.color = 'black';
+} else if (blockText === 'Integer') {
+    blockElement.classList.add('block');
+    blockElement.classList.add('block-data');
+    blockElement.style.color = 'black';
+} else if (blockText === 'Float') {
+    blockElement.classList.add('block');
+    blockElement.classList.add('block-data');
+    blockElement.style.color = 'black';
+} else if (blockText === 'Boolean') {
+    blockElement.classList.add('block');
+    blockElement.classList.add('block-data');
+    blockElement.style.color = 'black';
+} else {
+    blockElement.classList.add('block');
+}
 
 // Create the code element to display the Python code
 const codeElement = document.createElement('pre');
@@ -118,6 +190,13 @@ blockElement.addEventListener('dragend', event => {
 workspace.appendChild(blockElement);
 
     makeBlocksDraggable();
+    saveWorkspaceState();
+  });
+
+    // Reset button event listener
+  resetButton.addEventListener('click', () => {
+    workspace.innerHTML = '';
+    indentLevel = 0;
     saveWorkspaceState();
   });
 }

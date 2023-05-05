@@ -40,11 +40,16 @@ h4 {
   cursor: move;
 }
 
-.ws-block {
+.reset-button {
   padding: 10px;
-    margin: 5px;
+  margin: 5px;
   border-radius: 5px;
-  cursor: move;
+  border: 1px solid #ddd;
+  cursor: pointer;
+}
+
+.reset-button:hover {
+  background-color: #ddd;
 }
 
 /* Button styles */
